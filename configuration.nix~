@@ -55,6 +55,22 @@
   security.polkit.enable = true;
   hardware.graphics.enable = true;
 
+  # Enable the X11 windowing system.
+  #services.xserver.enable = true;
+
+  # Enable the Pantheon Desktop Environment.
+  #services.xserver.displayManager.lightdm.enable = true;
+  #services.xserver.desktopManager.pantheon.enable = true;
+
+  # Configure keymap in X11
+  #services.xserver.xkb = {
+  #  layout = "us";
+  #  variant = "";
+  #};
+
+  # Enable CUPS to print documents.
+  #services.printing.enable = true;
+
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -81,6 +97,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
     #  thunderbird
+    nyxt
     ];
   };
 
@@ -95,7 +112,6 @@
   environment.systemPackages = with pkgs; [
     wget
     foot
-    hyprpolkitagent
     waybar
     xfce.thunar
     wl-clipboard
