@@ -4,27 +4,89 @@
   home.username = "david";
   home.homeDirectory = "/home/david";
   home.stateVersion = "25.05";
-  home.packages = [ pkgs.nixfmt-rfc-style ];
+
+  home.packages = with pkgs; [
+    nixfmt-rfc-style
+    ripgrep
+    jq
+    nnn
+    sparkle
+    xfce.thunar
+    firefox
+    nwg-displays
+    nwg-clipman
+  ];
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+    package = null;
+    systemd.enable = false;
+  };
+
+  xdg.portal.config = {
+    common = {
+      default = [
+        "gtk"
+      ];
+    };
+    pantheon = {
+      default = [
+        "pantheon"
+        "gtk"
+      ];
+      "org.freedesktop.impl.portal.Secret" = [
+        "gnome-keyring"
+      ];
+    };
+    x-cinnamon = {
+      default = [
+        "xapp"
+        "gtk"
+      ];
+    };
+  };
+
+  programs.starship = {
+    enable = true;
+    enableBashIntegration = true;
+    enableNushellIntegration = true;
+    settings = {
+      add_newline = false;
+    };
+  };
+
+  programs.bash = {
+    enable = true;
+    enableCompletion = true;
+  };
+
+  programs.nushell = {
+    enable = true;
+  };
+
   programs.git = {
     enable = true;
     userEmail = "aquairain@gmail.com";
     userName = "David Zhang";
   };
+
   programs.emacs = {
     enable = true;
     package = pkgs.emacs-pgtk;
     extraConfig = builtins.readFile ./init.el;
     extraPackages = epkgs: [
-      epkgs.nix-mode
-      epkgs.modus-themes
       epkgs.which-key
+      epkgs.nix-mode
     ];
   };
+
   programs.foot = {
     enable = true;
     server.enable = true;
     settings = {
       main = {
+        term = "xterm-256color";
+        shell = "nu";
         font = "FiraCode Nerd Font Mono:size=10";
         dpi-aware = "yes";
       };
@@ -33,6 +95,7 @@
       };
     };
   };
+
   programs.ashell = {
     enable = true;
     settings = {
