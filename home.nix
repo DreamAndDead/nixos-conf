@@ -9,7 +9,7 @@
     nixfmt-rfc-style
     ripgrep
     jq
-    nnn
+    yazi
     sparkle
     xfce.thunar
     firefox
