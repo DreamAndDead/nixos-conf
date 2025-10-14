@@ -55,22 +55,6 @@
   security.polkit.enable = true;
   hardware.graphics.enable = true;
 
-  # Enable the X11 windowing system.
-  #services.xserver.enable = true;
-
-  # Enable the Pantheon Desktop Environment.
-  #services.xserver.displayManager.lightdm.enable = true;
-  #services.xserver.desktopManager.pantheon.enable = true;
-
-  # Configure keymap in X11
-  #services.xserver.xkb = {
-  #  layout = "us";
-  #  variant = "";
-  #};
-
-  # Enable CUPS to print documents.
-  #services.printing.enable = true;
-
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -90,14 +74,14 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.david = {
     isNormalUser = true;
     description = "david";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-    #  thunderbird
-    nyxt
+      sparkle
+      emacs-pgtk
+      xfce.thunar
     ];
   };
 
@@ -111,23 +95,15 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
+    tuigreet
     foot
-    waybar
-    xfce.thunar
+    nushell
+    hyprpolkitagent
+    ashell
     wl-clipboard
     cliphist
     dunst
     wofi
-    tuigreet
-    emacs-pgtk
-    sparkle
-    clang
-    clang-tools
-    gcc    
-    gdb
-    sdl3
-    ninja
-    nushell
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

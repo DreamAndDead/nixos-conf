@@ -9,6 +9,36 @@
     userEmail = "aquairain@gmail.com";
     userName = "David Zhang";
   };
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacs-pgtk;
+    extraConfig = builtins.readFile ./init.el;
+    extraPackages = epkgs: [ epkgs.nix-mode epkgs.modus-themes epkgs.which-key ];
+  };
+  programs.ashell = {
+    enable = true;
+    settings = {
+      modules = {
+        center = [
+	  "Window Title"
+	];
+	left = [
+	  "Workspaces"
+	];
+	right = [
+	  "SystemInfo"
+	  [
+	    "Clock"
+	    "Privacy"
+	    "Settings"
+	  ]
+	];
+      };
+      workspaces = {
+        visibility_mode = "MonitorSpecific";
+      };
+    };
+  };
   programs.wofi = {
     enable = true;
     settings = {

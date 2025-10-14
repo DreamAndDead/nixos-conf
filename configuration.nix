@@ -74,13 +74,13 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.david = {
     isNormalUser = true;
     description = "david";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-    #  thunderbird
+      sparkle
+      xfce.thunar
     ];
   };
 
@@ -94,24 +94,15 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
+    tuigreet
     foot
+    nushell
     hyprpolkitagent
-    waybar
-    xfce.thunar
+    ashell
     wl-clipboard
     cliphist
     dunst
     wofi
-    tuigreet
-    emacs-pgtk
-    sparkle
-    clang
-    clang-tools
-    gcc    
-    gdb
-    sdl3
-    ninja
-    nushell
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
