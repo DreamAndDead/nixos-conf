@@ -77,10 +77,12 @@
     foot
     nushell
     hyprpolkitagent
-    ashell
     wl-clipboard
     cliphist
     wofi
+    mako
+    waybar
+    ashell
   ];
 
   # fonts

@@ -15,6 +15,10 @@
     firefox
     nwg-displays
     nwg-clipman
+    nyxt
+    just
+    bilibili
+    freetube
   ];
 
   wayland.windowManager.hyprland = {
@@ -53,6 +57,12 @@
     settings = {
       add_newline = false;
     };
+  };
+
+  programs.carapace = {
+    enable = true;
+    enableBashIntegration = true;
+    enableNushellIntegration = true;
   };
 
   programs.bash = {
