@@ -8,14 +8,14 @@
   home.packages = with pkgs; [
     nixfmt-rfc-style
     ripgrep
-    jq
     yazi
+    unzip
     sparkle
     xfce.thunar
     firefox
+    qutebrowser
     nwg-displays
     nwg-clipman
-    nyxt
     just
     bilibili
     freetube
