@@ -12,6 +12,8 @@
     unzip
     sparkle
     xfce.thunar
+    xfce.thunar-volman
+    xfce.thunar-archive-plugin
     firefox
     qutebrowser
     nwg-displays
