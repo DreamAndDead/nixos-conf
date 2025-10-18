@@ -8,7 +8,7 @@
   home.packages = with pkgs; [
     nixfmt-rfc-style
     ripgrep
-    yazi
+    mc
     unzip
     sparkle
     xfce.thunar
