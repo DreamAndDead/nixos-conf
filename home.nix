@@ -1,5 +1,6 @@
-{ config, pkgs, ... }:
-
+{ config, pkgs, ... }: let
+  hyprConfigPath = "${config.home.homeDirectory}/Project/nixos-conf/home/hyprland";
+in
 {
   home.username = "david";
   home.homeDirectory = "/home/david";
@@ -28,6 +29,7 @@
     package = null;
     systemd.enable = false;
   };
+  xdg.configFile."hypr".source = config.lib.file.mkOutOfStoreSymlink hyprConfigPath;
 
   xdg.portal.config = {
     common = {
