@@ -1,5 +1,6 @@
 { config, pkgs, ... }: let
   hyprConfigPath = "${config.home.homeDirectory}/Project/nixos-conf/home/hyprland";
+  footConfigPath = "${config.home.homeDirectory}/Project/nixos-conf/home/foot";
 in
 {
   home.username = "david";
@@ -87,7 +88,7 @@ in
   programs.emacs = {
     enable = true;
     package = pkgs.emacs-pgtk;
-    extraConfig = builtins.readFile ./init.el;
+    extraConfig = builtins.readFile ./home/emacs/init.el;
     extraPackages = epkgs: [
       epkgs.which-key
       epkgs.nix-mode
@@ -97,18 +98,8 @@ in
   programs.foot = {
     enable = true;
     server.enable = true;
-    settings = {
-      main = {
-        term = "xterm-256color";
-        shell = "nu";
-        font = "FiraCode Nerd Font Mono:size=10";
-        dpi-aware = "yes";
-      };
-      mouse = {
-        hide-when-typing = "yes";
-      };
-    };
   };
+  xdg.configFile."foot".source = config.lib.file.mkOutOfStoreSymlink footConfigPath;
 
   programs.ashell = {
     enable = true;
