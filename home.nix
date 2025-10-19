@@ -16,10 +16,11 @@ in
     xfce.thunar
     xfce.thunar-volman
     xfce.thunar-archive-plugin
+    swayimg
+    gimp3
     firefox
     qutebrowser
     nwg-displays
-    nwg-clipman
     just
     bilibili
     freetube
