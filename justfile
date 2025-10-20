@@ -13,6 +13,7 @@ switch:
     git add .
     git commit -m 'after test, burn into boot'
     sudo nixos-rebuild switch
+    git push
 
 edit:
     emacs -nw home.nix

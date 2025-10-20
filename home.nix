@@ -1,5 +1,5 @@
 { config, pkgs, ... }: let
-  hyprConfigPath = "${config.home.homeDirectory}/Project/nixos-conf/home/hyprland";
+  hyprConfigPath = "${config.home.homeDirectory}/Project/nixos-conf/home/hypr";
   footConfigPath = "${config.home.homeDirectory}/Project/nixos-conf/home/foot";
 in
 {

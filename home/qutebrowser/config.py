@@ -2154,12 +2154,16 @@ c.url.default_page = 'https://google.com/'
 ## the search engine name to the search term, e.g. `:open google
 ## qutebrowser`.
 ## Type: Dict
-c.url.searchengines = {'DEFAULT': 'https://google.com/search?q={}',
-                       'b': 'https://bing.com/search?q={}'}
+c.url.searchengines = {
+    'DEFAULT': 'https://duckduckgo.com/?q={}',
+    'g': 'https://google.com/search?q={}',
+    'b': 'https://bing.com/search?q={}',
+    'n': 'https://search.nixos.org/packages?channel=25.05&query={}'
+}
 
 ## Page(s) to open at the start.
 ## Type: List of FuzzyUrl, or FuzzyUrl
-c.url.start_pages = ['https://google.com']
+c.url.start_pages = ['qute://help/index.html']
 
 ## URL parameters to strip when yanking a URL.
 ## Type: List of String
