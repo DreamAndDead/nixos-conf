@@ -31,17 +31,17 @@
     fsType = "ext4";
   };
 
-  #  fileSystems."/home/david/Windows" = {
-  #    depends = [
-  #      "/"
-  #    ];
-  #    device = "/dev/disk/by-uuid/0292D9CF92D9C777";
-  #    fsType = "ntfs";
-  #    options = [
-  #      "gid=100"
-  #      "uid=1000"
-  #    ];
-  #  };
+  fileSystems."/home/david/Windows" = {
+    #    depends = [
+    #      "/"
+    #    ];
+    device = "/dev/disk/by-uuid/0292D9CF92D9C777";
+    fsType = "ntfs";
+    #    options = [
+    #      "gid=100"
+    #      "uid=1000"
+    #    ];
+  };
 
   swapDevices = [ ];
 
