@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: let
+{ config, pkgs, ... }:
+let
   hyprConfigPath = "${config.home.homeDirectory}/Project/nixos-conf/home/hypr";
   footConfigPath = "${config.home.homeDirectory}/Project/nixos-conf/home/foot";
 in
@@ -105,5 +106,25 @@ in
   programs.qutebrowser = {
     enable = true;
     extraConfig = builtins.readFile ./home/qutebrowser/config.py;
-  };    
+  };
+
+  programs.mpv = {
+    enable = true;
+
+    package = (
+      pkgs.mpv-unwrapped.wrapper {
+        mpv = pkgs.mpv-unwrapped.override {
+          waylandSupport = true;
+          ffmpeg = pkgs.ffmpeg-full;
+        };
+      }
+    );
+
+    config = {
+      profile = "high-quality";
+      ytdl-format = "bestvideo+bestaudio";
+      cache-default = 4000000;
+    };
+  };
+
 }
