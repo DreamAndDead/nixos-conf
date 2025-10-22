@@ -83,10 +83,7 @@
     hyprpolkitagent
     wl-clipboard
     cliphist
-    wofi
-    mako
-    waybar
-    ashell
+    xwayland-satellite
   ];
 
   # fonts
