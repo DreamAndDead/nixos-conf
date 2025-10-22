@@ -2,7 +2,7 @@
 let
   hyprConfigPath = "${config.home.homeDirectory}/Project/nixos-conf/home/hypr";
   footConfigPath = "${config.home.homeDirectory}/Project/nixos-conf/home/foot";
-  niriConfigPath = "${config.home.homeDirectory}/Project/nixos-conf/home/niri/config.kdl";
+  niriConfigPath = "${config.home.homeDirectory}/Project/nixos-conf/home/niri";
 in
 {
   home.username = "david";
@@ -26,6 +26,7 @@ in
     nwg-displays
     bilibili
     freetube
+    fuzzel
   ];
 
   wayland.windowManager.hyprland = {
@@ -35,7 +36,7 @@ in
   };
   xdg.configFile."hypr".source = config.lib.file.mkOutOfStoreSymlink hyprConfigPath;
 
-  xdg.configFile."niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink niriConfigPath;
+  xdg.configFile."niri".source = config.lib.file.mkOutOfStoreSymlink niriConfigPath;
 
   xdg.portal.config = {
     common = {
