@@ -6,7 +6,7 @@
     settings = {
       default_session.command = ''
         ${pkgs.tuigreet}/bin/tuigreet \
-        --time --asterisks --user-menu --cmd "uwsm start -S hyprland-uwsm.desktop"
+        --time --asterisks --remember --remember-session --user-menu --cmd "uwsm start -S hyprland-uwsm.desktop"
       '';
     };
   };

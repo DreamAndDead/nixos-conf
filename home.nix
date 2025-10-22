@@ -2,6 +2,7 @@
 let
   hyprConfigPath = "${config.home.homeDirectory}/Project/nixos-conf/home/hypr";
   footConfigPath = "${config.home.homeDirectory}/Project/nixos-conf/home/foot";
+  niriConfigPath = "${config.home.homeDirectory}/Project/nixos-conf/home/niri/config.kdl";
 in
 {
   home.username = "david";
@@ -33,6 +34,8 @@ in
     systemd.enable = false;
   };
   xdg.configFile."hypr".source = config.lib.file.mkOutOfStoreSymlink hyprConfigPath;
+
+  xdg.configFile."niri/config.kdl".source = config.lib.file.mkOutOfStoreSymlink niriConfigPath;
 
   xdg.portal.config = {
     common = {
