@@ -22,20 +22,9 @@ output "HDMI-A-1" {
 }
 
 
-// This config is in the KDL format: https://kdl.dev
-// "/-" comments out the following node.
-// Check the wiki for a full description of the configuration:
-// https://yalter.github.io/niri/Configuration:-Introduction
-
-// Input device configuration.
-// Find the full list of options on the wiki:
-// https://yalter.github.io/niri/Configuration:-Input
 input {
     keyboard {
         xkb {
-            // You can set rules, model, layout, variant and options.
-            // For more information, see xkeyboard-config(7).
-
             // For example:
             // layout "us,ru"
             // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
@@ -82,20 +71,16 @@ input {
         // middle-emulation
     }
 
-    // Uncomment this to make the mouse warp to the center of newly focused windows.
-    // warp-mouse-to-focus
+    warp-mouse-to-focus
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    // focus-follows-mouse max-scroll-amount="0%"
+    focus-follows-mouse max-scroll-amount="0%"
 }
 
 
-// Settings that influence how windows are positioned and sized.
-// Find more information on the wiki:
-// https://yalter.github.io/niri/Configuration:-Layout
 layout {
-    gaps 8
+    gaps 6
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -291,6 +276,7 @@ animations {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Window-Rules
 
+
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
 window-rule {
@@ -329,6 +315,13 @@ window-rule {
     clip-to-geometry true
 }
 
+window-rule {
+  match app-id="linux_main.out"
+  default-window-height { fixed 540; }
+  default-column-width { fixed 960; }
+}
+
+
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -349,8 +342,8 @@ binds {
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     Mod+T hotkey-overlay-title="Open a Terminal"  { spawn "footclient"; }
-    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    // { spawn "noctalia-shell ipc call launcher toggle"; }
+    Mod+D hotkey-overlay-title="Run An Application" { spawn "fuzzel"; }
+//    Mod+D hotkey-overlay-title="Run an Application" { spawn "noctalia-shell ipc call launcher toggle"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -421,15 +414,17 @@ binds {
     Mod+Shift+Down  { focus-monitor-down; }
     Mod+Shift+Up    { focus-monitor-up; }
     Mod+Shift+Right { focus-monitor-right; }
-    Mod+Shift+H     { focus-monitor-left; }
+
+    Mod+A     { focus-monitor-left; }
     Mod+Shift+J     { focus-monitor-down; }
     Mod+Shift+K     { focus-monitor-up; }
-    Mod+Shift+L     { focus-monitor-right; }
+    Mod+E     { focus-monitor-right; }
 
     Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
     Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
     Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
     Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+
     Mod+N     { move-column-to-monitor-left; }
     Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
     Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }

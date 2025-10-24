@@ -2,16 +2,23 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Cache Mirror
-  nix.settings.substituters = lib.mkForce [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
+  nix.settings.substituters = lib.mkForce [
+    "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+  ];
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -23,7 +30,7 @@
 
   time.timeZone = "Asia/Shanghai";
 
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "zh_CN.UTF-8";
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "zh_CN.UTF-8";
@@ -35,6 +42,16 @@
     LC_PAPER = "zh_CN.UTF-8";
     LC_TELEPHONE = "zh_CN.UTF-8";
     LC_TIME = "zh_CN.UTF-8";
+  };
+
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5.waylandFrontend = true;
+    fcitx5.addons = with pkgs; [
+      fcitx5-fluent
+      fcitx5-rime
+    ];
   };
 
   security.polkit.enable = true;
@@ -60,7 +77,10 @@
   users.users.david = {
     isNormalUser = true;
     description = "david";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
   };
 
   programs.hyprland = {
@@ -91,6 +111,9 @@
     nerd-fonts.fira-code
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   system.stateVersion = "25.05"; # Did you read the comment?
 }
