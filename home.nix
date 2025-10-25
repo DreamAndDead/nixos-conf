@@ -26,7 +26,9 @@ in
     nwg-displays
     bilibili
     freetube
-    fuzzel
+
+    ddcutil
+    brightnessctl
   ];
 
   wayland.windowManager.hyprland = {

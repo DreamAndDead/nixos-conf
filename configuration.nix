@@ -25,6 +25,7 @@
   boot.loader.grub.device = "/dev/nvme0n1";
   boot.loader.grub.useOSProber = true;
 
+
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
 
@@ -56,6 +57,10 @@
 
   security.polkit.enable = true;
   hardware.graphics.enable = true;
+
+
+  boot.kernelModules = [ "i2c-dev" ];
+  hardware.i2c.enable = true;
 
 #  services.gvfs.enable = true;
   services.udisks2.enable = true;
