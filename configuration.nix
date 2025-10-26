@@ -45,22 +45,18 @@
     LC_TIME = "zh_CN.UTF-8";
   };
 
-  i18n.inputMethod = {
-    enable = true;
-    type = "fcitx5";
-    fcitx5.waylandFrontend = true;
-    fcitx5.addons = with pkgs; [
-      fcitx5-fluent
-      fcitx5-rime
-    ];
-  };
+#  i18n.inputMethod = {
+#    enable = true;
+#    type = "fcitx5";
+#    fcitx5.waylandFrontend = true;
+#    fcitx5.addons = with pkgs; [
+#      fcitx5-fluent
+#      fcitx5-rime
+#    ];
+#  };
 
   security.polkit.enable = true;
   hardware.graphics.enable = true;
-
-
-  boot.kernelModules = [ "i2c-dev" ];
-  hardware.i2c.enable = true;
 
 #  services.gvfs.enable = true;
   services.udisks2.enable = true;

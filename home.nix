@@ -78,6 +78,13 @@ in
     enableNushellIntegration = true;
   };
 
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    enableNushellIntegration = true;
+    nix-direnv.enable = true;
+  };
+
   programs.bash = {
     enable = true;
     enableCompletion = true;
