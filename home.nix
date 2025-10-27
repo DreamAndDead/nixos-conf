@@ -89,6 +89,9 @@ in
     enable = true;
     enableBashIntegration = true;
     enableNushellIntegration = true;
+    options = [
+      "--cmd j"
+    ];
   };
 
   programs.zellij = {
