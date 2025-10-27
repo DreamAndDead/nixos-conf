@@ -25,14 +25,12 @@
   boot.loader.grub.device = "/dev/nvme0n1";
   boot.loader.grub.useOSProber = true;
 
-
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
 
   time.timeZone = "Asia/Shanghai";
 
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "zh_CN.UTF-8";
     LC_IDENTIFICATION = "zh_CN.UTF-8";
@@ -45,20 +43,25 @@
     LC_TIME = "zh_CN.UTF-8";
   };
 
-#  i18n.inputMethod = {
-#    enable = true;
-#    type = "fcitx5";
-#    fcitx5.waylandFrontend = true;
-#    fcitx5.addons = with pkgs; [
-#      fcitx5-fluent
-#      fcitx5-rime
-#    ];
-#  };
+  i18n.inputMethod = {
+    enable = true;
+
+    # type = "fcitx5";
+    # fcitx5.waylandFrontend = true;
+    # fcitx5.addons = with pkgs; [
+      # fcitx5-rime
+    # ];
+
+    type = "ibus";
+    ibus.engines = with pkgs.ibus-engines; [
+      rime
+    ];
+  };
 
   security.polkit.enable = true;
   hardware.graphics.enable = true;
 
-#  services.gvfs.enable = true;
+  #  services.gvfs.enable = true;
   services.udisks2.enable = true;
 
   # Enable sound with pipewire.

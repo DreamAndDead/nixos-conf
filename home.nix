@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 let
   hyprConfigPath = "${config.home.homeDirectory}/Project/nixos-conf/home/hypr";
-  footConfigPath = "${config.home.homeDirectory}/Project/nixos-conf/home/foot";
   niriConfigPath = "${config.home.homeDirectory}/Project/nixos-conf/home/niri";
 in
 {
@@ -9,6 +8,10 @@ in
   home.homeDirectory = "/home/david";
   home.stateVersion = "25.05";
 
+  catppuccin = {
+    enable = true;
+  };
+  
   home.packages = with pkgs; [
     nixfmt-rfc-style
     ripgrep
@@ -26,9 +29,6 @@ in
     nwg-displays
     bilibili
     freetube
-
-    ddcutil
-    brightnessctl
   ];
 
   wayland.windowManager.hyprland = {
@@ -36,7 +36,7 @@ in
     package = null;
     systemd.enable = false;
   };
-  xdg.configFile."hypr".source = config.lib.file.mkOutOfStoreSymlink hyprConfigPath;
+#  xdg.configFile."hypr".source = config.lib.file.mkOutOfStoreSymlink hyprConfigPath;
 
   xdg.configFile."niri".source = config.lib.file.mkOutOfStoreSymlink niriConfigPath;
 
@@ -85,6 +85,18 @@ in
     nix-direnv.enable = true;
   };
 
+  programs.zoxide = {
+    enable = true;
+    enableBashIntegration = true;
+    enableNushellIntegration = true;
+  };
+
+  programs.zellij = {
+    enable = true;
+    enableBashIntegration = true;
+#    enableNushellIntegration = true;
+  };
+
   programs.bash = {
     enable = true;
     enableCompletion = true;
@@ -113,12 +125,6 @@ in
   programs.foot = {
     enable = true;
     server.enable = true;
-  };
-  xdg.configFile."foot".source = config.lib.file.mkOutOfStoreSymlink footConfigPath;
-
-  programs.qutebrowser = {
-    enable = true;
-    extraConfig = builtins.readFile ./home/qutebrowser/config.py;
   };
 
   programs.mpv = {
