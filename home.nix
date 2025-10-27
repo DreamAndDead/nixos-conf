@@ -11,7 +11,7 @@ in
   catppuccin = {
     enable = true;
   };
-  
+
   home.packages = with pkgs; [
     nixfmt-rfc-style
     ripgrep
@@ -36,8 +36,8 @@ in
     package = null;
     systemd.enable = false;
   };
-#  xdg.configFile."hypr".source = config.lib.file.mkOutOfStoreSymlink hyprConfigPath;
 
+  # todo managed by nix file
   xdg.configFile."niri".source = config.lib.file.mkOutOfStoreSymlink niriConfigPath;
 
   xdg.portal.config = {
@@ -94,12 +94,16 @@ in
   programs.zellij = {
     enable = true;
     enableBashIntegration = true;
-#    enableNushellIntegration = true;
+    #    enableNushellIntegration = true;
   };
 
   programs.bash = {
     enable = true;
     enableCompletion = true;
+  };
+
+  programs.fish = {
+    enable = true;
   };
 
   programs.nushell = {
@@ -108,8 +112,12 @@ in
 
   programs.git = {
     enable = true;
-    userEmail = "aquairain@gmail.com";
-    userName = "David Zhang";
+    settings = {
+      user = {
+        email = "aquairain@gmail.com";
+        name = "David Zhang";
+      };
+    };
   };
 
   programs.emacs = {
@@ -125,6 +133,17 @@ in
   programs.foot = {
     enable = true;
     server.enable = true;
+    settings = {
+      main = {
+        term = "xterm-256color";
+        shell = "nu";
+        font = "FiraCode Nerd Font Mono:size=10";
+        dpi-aware = "yes";
+      };
+      mouse = {
+        hide-when-typing = "yes";
+      };
+    };
   };
 
   programs.mpv = {
