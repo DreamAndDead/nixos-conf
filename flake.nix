@@ -47,7 +47,7 @@
                 ./home.nix
                 catppuccin.homeModules.catppuccin
               ];
-#              backupFileExtension = "bak";
+              backupFileExtension = "bak";
             };
           }
         ];

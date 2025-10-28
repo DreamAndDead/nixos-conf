@@ -1,9 +1,0 @@
-[main]
-include=~/.config/foot/themes/noctalia
-dpi-aware=yes
-font=FiraCode Nerd Font Mono:size=10
-shell=nu
-term=xterm-256color
-
-[mouse]
-hide-when-typing=yes
