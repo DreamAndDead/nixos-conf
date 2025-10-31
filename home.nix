@@ -29,6 +29,7 @@ in
     nwg-displays
     bilibili
     freetube
+    telegram-desktop
   ];
 
   wayland.windowManager.hyprland = {
@@ -168,6 +169,9 @@ in
       fullscreen = "yes";
       hwdec = "vulkan";
     };
-  };
 
+    bindings = {
+      MBTN_LEFT = "no-osd cycle pause";
+    };
+  };
 }
