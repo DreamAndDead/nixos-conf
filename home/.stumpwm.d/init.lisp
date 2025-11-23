@@ -22,19 +22,17 @@
 
 (define-key *root-map* (kbd "t") "exec alacritty")
 
-;; 1 default
+;; 1 Default
 ;; 2
-(gnewbg-dynamic "dynamic")
+(gnewbg-dynamic "Dynamic")
 ;; 3
-(gnewbg-float "float")
+(gnewbg-float "Float")
 
 (set-normal-gravity :top)
 (setf *message-window-gravity* :bottom-right)
 (setf *input-window-gravity* :center)
 (setf *mouse-focus-policy* :sloppy)
 (setf *window-border-style* :tight)
-
-
 
 
 (ql:quickload "clx-truetype")
@@ -52,4 +50,12 @@
 (setf *mode-line-position* :bottom)
 (dolist (h (screen-heads (current-screen)))
   (enable-mode-line (current-screen) h t))
+
+(restore-from-file "hero")
+
+; window placement rules
+(clear-window-placement-rules)
+
+
+
 
