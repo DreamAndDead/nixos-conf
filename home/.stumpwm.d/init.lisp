@@ -1,17 +1,32 @@
-#-quicklisp
-(let ((quicklisp-init (merge-pathnames ".roswell/lisp/quicklisp/setup.lisp"
-				       (user-homedir-pathname))))
-  (when (probe-file quicklisp-init)
-    (load quicklisp-init)))
-
 ;; -*-lisp-*-
 (in-package :stumpwm)
 
 (set-prefix-key (kbd "M-SPC"))
 
-(run-shell-command "autorandr -c stumpwm-layout")
-(run-shell-command "xsetroot -cursor_name left_ptr")
+;; TODO
+;;; bind key to start v2ray, librewolf
+;;; how to use dynamic group
+;;; how to use float group
+;;; unbinding useless key
+;;; custom keymap?
+;;;; window group
+;;;; frame group
 
+
+;; multi monitors
+;;; arandr gui, set layout
+;;; autorandr cli, save layout
+;;; autorandr cli, load layout when wm start
+(run-shell-command "autorandr -l stumpwm-layout")
+
+;; load wm layout
+;;; commmand: dump-group-to-file hero
+;(restore-from-file "hero")
+
+(run-shell-command "xsetroot -cursor_name left_ptr")
+(run-shell-command "xset r rate 200 60")
+
+;; live coding
 (ql:quickload "slynk")
 (defcommand slynk (port) ((:string "Port number: "))
   (sb-thread:make-thread
@@ -19,14 +34,15 @@
      (slynk:create-server :port (parse-integer port) :dont-close t))
    :name "slynk-stumpwm"))
 
-
-(define-key *root-map* (kbd "t") "exec alacritty")
+;; key bindings
+(define-key *root-map* (kbd "t") "exec xfce4-terminal")
 
 ;; 1 Default
 ;; 2
 (gnewbg-dynamic "Dynamic")
 ;; 3
 (gnewbg-float "Float")
+
 
 (set-normal-gravity :top)
 (setf *message-window-gravity* :bottom-right)
@@ -35,10 +51,8 @@
 (setf *window-border-style* :tight)
 
 
-(ql:quickload "clx-truetype")
-(load-module "ttf-fonts")
-;; (xft:cache-fonts) ;; do this only once
-(set-font (make-instance 'xft:font :family "DejaVu Sans Mono" :subfamily "Book" :size 11))
+;; TODO ttf font later
+(set-font "-*-*-medium-r-normal-*-*-*-*-*-*-*-*-*")
 
 
 (setf *startup-message* nil)
@@ -51,7 +65,7 @@
 (dolist (h (screen-heads (current-screen)))
   (enable-mode-line (current-screen) h t))
 
-(restore-from-file "hero")
+
 
 ; window placement rules
 (clear-window-placement-rules)
