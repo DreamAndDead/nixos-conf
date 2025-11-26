@@ -4,15 +4,10 @@
 (set-prefix-key (kbd "M-SPC"))
 
 ;; TODO
-;;; bind key to start v2ray, librewolf
 ;;; how to use dynamic group
 ;;; how to use float group
-;;; unbinding useless key
-;;; custom keymap?
-;;;; window group
-;;;; frame group
 
-;; x setting
+;; x setting, maybe in xinit file?
 (run-shell-command "xsetroot -cursor_name left_ptr")
 (run-shell-command "xset r rate 200 60")
 
@@ -36,20 +31,23 @@
 
 ;;; launch web browser
 (defcommand launch-web-browser () ()
-  (run-shell-command "flatpak run io.gitlab.librewolf-community"))
+  (run-or-raise "flatpak run io.gitlab.librewolf-community" '(:class "librewolf")))
 
 ;;; launch vial
 (defcommand launch-vial () ()
-  (run-shell-command "~/Downloads/Vial-v0.7.5-x86_64.AppImage"))
+  (run-or-raise "~/Downloads/Vial-v0.7.5-x86_64.AppImage" '(:class "Vial")))
 
 ;;; launch v2rayn
-(defcommand launch-v2ray () ()
-  (run-shell-command "~/Downloads/v2rayN-linux-64.AppImage"))
+(defcommand launch-proxy () ()
+  (run-or-raise "~/Downloads/v2rayN-linux-64.AppImage" '(:class "v2rayN")))
+
+;;; launch terminal
+(defcommand launch-terminal () ()
+  (run-or-raise "xfce4-terminal" '(:class "Xfce4-terminal")))
 
 
 ;; key bindings
 ;;; clean first
-(undefine-key *root-map* (kbd "c"))
 (undefine-key *root-map* (kbd "C-c"))
 (undefine-key *root-map* (kbd "C-e"))
 (undefine-key *root-map* (kbd "C-b"))
@@ -82,21 +80,34 @@
 (undefine-key *root-map* (kbd "a"))
 (undefine-key *root-map* (kbd "s"))
 (undefine-key *root-map* (kbd "S"))
+(undefine-key *root-map* (kbd "c"))
+(undefine-key *root-map* (kbd "v"))
+(undefine-key *root-map* (kbd "h"))
+(undefine-key *root-map* (kbd "Q"))
 ;;;; quit-confirm is dangerous
 (undefine-key *root-map* (kbd "q"))
 
 ;;; custom
+;;;; Emacs Style Frame Splitting
+(define-key *root-map* (kbd "0") "remove")
+(define-key *root-map* (kbd "1") "only")
+(define-key *root-map* (kbd "2") "vsplit")
+(define-key *root-map* (kbd "3") "hsplit")
+
 (define-key *root-map* (kbd "H") '*help-map*)
 (define-key *root-map* (kbd "G") '*groups-map*)
-(define-key *root-map* (kbd "v") "vsplit")
-(define-key *root-map* (kbd "h") "hsplit")
 (define-key *root-map* (kbd "s") "windowlist")
 (define-key *root-map* (kbd "S") "pull-from-windowlist")
 (define-key *root-map* (kbd "g") "gselect")
 (define-key *root-map* (kbd "d") "time")
 
+(define-key *root-map* (kbd "t") "launch-terminal")
+(define-key *root-map* (kbd "w") "launch-web-browser")
 
-(define-key *root-map* (kbd "t") "exec xfce4-terminal")
+
+;; modules
+(load-module "beckon")
+(define-key *root-map* (kbd "B") "beckon")
 
 
 ;; font
@@ -107,6 +118,58 @@
 (set-font (make-instance 'xft:font :family "Maple Mono NF CN" :subfamily "Regular" :size 10))
 
 
+;; color
+(defvar phundrak-nord0 "#2e3440")
+(defvar phundrak-nord1 "#3b4252")
+(defvar phundrak-nord2 "#434c5e")
+(defvar phundrak-nord3 "#4c566a")
+(defvar phundrak-nord4 "#d8dee9")
+(defvar phundrak-nord5 "#e5e9f0")
+(defvar phundrak-nord6 "#eceff4")
+(defvar phundrak-nord7 "#8fbcbb")
+(defvar phundrak-nord8 "#88c0d0")
+(defvar phundrak-nord9 "#81a1c1")
+(defvar phundrak-nord10 "#5e81ac")
+(defvar phundrak-nord11 "#bf616a")
+(defvar phundrak-nord12 "#d08770")
+(defvar phundrak-nord13 "#ebcb8b")
+(defvar phundrak-nord14 "#a3be8c")
+(defvar phundrak-nord15 "#b48ead")
+
+(setq *colors*
+      `(,phundrak-nord1   ;; 0 black
+        ,phundrak-nord11  ;; 1 red
+        ,phundrak-nord14  ;; 2 green
+        ,phundrak-nord13  ;; 3 yellow
+        ,phundrak-nord10  ;; 4 blue
+        ,phundrak-nord14  ;; 5 magenta
+        ,phundrak-nord8   ;; 6 cyan
+        ,phundrak-nord5)) ;; 7 white
+
+(update-color-map (current-screen))
+
+
+(set-border-color        phundrak-nord1)
+(set-focus-color         phundrak-nord1)
+(set-unfocus-color       phundrak-nord3)
+(set-float-focus-color   phundrak-nord1)
+(set-float-unfocus-color phundrak-nord3)
+
+(set-fg-color phundrak-nord4)
+(set-bg-color phundrak-nord1)
+
+(setf *normal-border-width*       0
+      *float-window-border*       0
+      *float-window-title-height* 15
+      *window-border-style*       :none
+      *window-format*             "%m%n%s%c %80t")
+
+(setf *input-window-gravity*     :top
+      *message-window-padding*   10
+      *message-window-y-padding* 10
+      *message-window-gravity*   :top)
+
+
 ;; multi group
 ;;; 1 Default
 ;;; 2
@@ -115,16 +178,12 @@
 (gnewbg-float "Float")
 
 
-
 (set-normal-gravity :top)
-(setf *message-window-gravity* :center)
-(setf *input-window-gravity* :center)
 (setf *mouse-focus-policy* :sloppy)
-(setf *window-border-style* :tight)
+
 (setf *startup-message* "StumpWM launched!")
-(setf *window-format* "%m%n%s%c")
-(setf *time-modeline-string* "%F %H:%M")
-(setf *group-format* "%t")
+(setf *time-modeline-string* "%F/%H:%M")
+(setf *group-format* "%n%s%t")
 
 
 ;; modeline
