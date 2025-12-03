@@ -31,20 +31,27 @@
 
 ;;; launch web browser
 (defcommand launch-web-browser () ()
+  (run-or-raise "brave-browser-stable" '(:class "Brave-browser")))
+
+;;; launch web browser
+(defcommand launch-librewolf() ()
   (run-or-raise "flatpak run io.gitlab.librewolf-community" '(:class "librewolf")))
 
 ;;; launch vial
 (defcommand launch-vial () ()
-  (run-or-raise "~/Downloads/Vial-v0.7.5-x86_64.AppImage" '(:class "Vial")))
+  (run-or-raise "~/Downloads/Apps/Vial-v0.7.5-x86_64.AppImage" '(:class "Vial")))
 
 ;;; launch v2rayn
 (defcommand launch-proxy () ()
-  (run-or-raise "~/Downloads/v2rayN-linux-64.AppImage" '(:class "v2rayN")))
+  (run-or-raise "~/Downloads/Apps/v2rayN-linux-64.AppImage" '(:class "v2rayN")))
 
 ;;; launch terminal
 (defcommand launch-terminal () ()
-  (run-or-raise "xfce4-terminal" '(:class "Xfce4-terminal")))
+  (run-or-raise "kitty" '(:class "kitty")))
 
+;;; launch emacs
+(defcommand launch-emacs () ()
+  (run-or-raise "emacsclient -c -n" '(:class "Emacs")))
 
 ;; key bindings
 ;;; clean first
@@ -101,9 +108,39 @@
 (define-key *root-map* (kbd "g") "gselect")
 (define-key *root-map* (kbd "d") "time")
 
+(define-key *root-map* (kbd "e") "launch-emacs")
+(define-key *root-map* (kbd "E") "emacs")
 (define-key *root-map* (kbd "t") "launch-terminal")
+(define-key *root-map* (kbd "T") "exec kitty")
 (define-key *root-map* (kbd "w") "launch-web-browser")
 
+
+;; remap keys
+(defparameter *default-remap-keys*
+  '(("C-n"   . "Down")
+    ("C-p"   . "Up")
+    ("M-v" . "SunPageUp")
+    ("C-v" . "SunPageDown")
+
+    ("C-g" . "ESC")
+    ("C-b" . "Left")
+    ("C-f" . "Right")
+    ("M-b" . "C-Left")
+    ("M-f" . "C-Right")
+    ("C-a" . "Home")
+    ("C-e" . "End")
+    ("C-d" . "Delete")
+    ("C-k" . ("S-End" "C-c" "DEL"))
+    ;; ("C-w" . "C-x")
+    ;; ("M-w" . "C-c")
+    ;; ("C-y" . "C-v")
+    ("C-s" . "C-f"))
+  "The default keys for remapping. Remember, DEL is backspace, Delete is Delete") 
+
+(define-remapped-keys
+    `(("Brave-browser"
+       ,@*default-remap-keys*
+       )))
 
 ;; modules
 (load-module "beckon")
@@ -115,7 +152,8 @@
 (push "~/.local/share/fonts/" xft:*font-dirs*)
 ;; do this only once
 ;; (xft:cache-fonts)
-(set-font (make-instance 'xft:font :family "Maple Mono NF CN" :subfamily "Regular" :size 10))
+;; (set-font (make-instance 'xft:font :family "Maple Mono NF CN" :subfamily "Regular" :size 14))
+(set-font (make-instance 'xft:font :family "IosevkaTerm NF" :subfamily "Regular" :size 14))
 
 
 ;; color
@@ -164,10 +202,11 @@
       *window-border-style*       :none
       *window-format*             "%m%n%s%c %80t")
 
-(setf *input-window-gravity*     :top
+(setf *input-window-gravity*     :center
       *message-window-padding*   10
       *message-window-y-padding* 10
-      *message-window-gravity*   :top)
+      *message-window-gravity*   :top
+      *message-window-input-gravity*   :top)
 
 
 ;; multi group
