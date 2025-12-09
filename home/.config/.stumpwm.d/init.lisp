@@ -30,10 +30,9 @@
    :name "slynk-stumpwm"))
 
 ;;; launch web browser
-(defcommand launch-web-browser () ()
+(defcommand launch-brave () ()
   (run-or-raise "brave-browser-stable" '(:class "Brave-browser")))
 
-;;; launch web browser
 (defcommand launch-librewolf() ()
   (run-or-raise "flatpak run io.gitlab.librewolf-community" '(:class "librewolf")))
 
@@ -112,7 +111,7 @@
 (define-key *root-map* (kbd "E") "emacs")
 (define-key *root-map* (kbd "t") "launch-terminal")
 (define-key *root-map* (kbd "T") "exec kitty")
-(define-key *root-map* (kbd "w") "launch-web-browser")
+(define-key *root-map* (kbd "w") "launch-brave")
 
 
 ;; remap keys
