@@ -7,15 +7,11 @@
 ;;; how to use dynamic group
 ;;; how to use float group
 
-;; x setting, maybe in xinit file?
-(run-shell-command "xsetroot -cursor_name left_ptr")
-(run-shell-command "xset r rate 200 60")
-
 ;; multi monitors
 ;;; arandr gui, set layout
 ;;; autorandr cli, save layout
 ;;; autorandr cli, load layout when wm start
-(run-shell-command "autorandr -l stumpwm-layout")
+(run-shell-command "autorandr -l stumpwm")
 
 ;; load wm layout
 ;;; commmand: dump-group-to-file hero
@@ -29,24 +25,17 @@
      (slynk:create-server :port (parse-integer port) :dont-close t))
    :name "slynk-stumpwm"))
 
-;;; launch web browser
-(defcommand launch-brave () ()
-  (run-or-raise "brave-browser-stable" '(:class "Brave-browser")))
+(defcommand launch-webbrowser() ()
+  (run-or-raise "librewolf" '(:class "librewolf")))
 
-(defcommand launch-librewolf() ()
-  (run-or-raise "flatpak run io.gitlab.librewolf-community" '(:class "librewolf")))
-
-;;; launch vial
 (defcommand launch-vial () ()
   (run-or-raise "~/Downloads/Apps/Vial-v0.7.5-x86_64.AppImage" '(:class "Vial")))
 
-;;; launch v2rayn
 (defcommand launch-proxy () ()
   (run-or-raise "~/Downloads/Apps/v2rayN-linux-64.AppImage" '(:class "v2rayN")))
 
-;;; launch terminal
 (defcommand launch-terminal () ()
-  (run-or-raise "kitty" '(:class "kitty")))
+  (run-or-raise "wezterm-gui" '(:class "org.wezfurlong.wezterm")))
 
 ;;; launch emacs
 (defcommand launch-emacs () ()
@@ -110,8 +99,7 @@
 (define-key *root-map* (kbd "e") "launch-emacs")
 (define-key *root-map* (kbd "E") "emacs")
 (define-key *root-map* (kbd "t") "launch-terminal")
-(define-key *root-map* (kbd "T") "exec kitty")
-(define-key *root-map* (kbd "w") "launch-brave")
+(define-key *root-map* (kbd "w") "launch-webbrowser")
 
 
 ;; remap keys
@@ -150,8 +138,7 @@
 (load-module "ttf-fonts")
 (push "~/.local/share/fonts/" xft:*font-dirs*)
 ;; do this only once
-;; (xft:cache-fonts)
-;; (set-font (make-instance 'xft:font :family "Maple Mono NF CN" :subfamily "Regular" :size 14))
+(xft:cache-fonts)
 (set-font (make-instance 'xft:font :family "IosevkaTerm NF" :subfamily "Regular" :size 14))
 
 
